@@ -1,0 +1,8 @@
+{
+  "name": "Habitos Saludables",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "e41e8821"
+}
