@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      {{ "TAB1_TITLE" | translate }} <!-- "TAB1_TITLE" -> reemplazar con el ID asignado en los ficheros de traducciones -->
+      {{ "TAB1_TITLE" | translate }}
+      <!-- "TAB1_TITLE" -> reemplazar con el ID asignado en los ficheros de traducciones -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,12 +15,23 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let habito of habitos">
-      <ion-label>
-        <h2>{{ habito.titulo }}</h2>
-        <p>{{ habito.descripcion }}</p>
-      </ion-label>
-      <ion-checkbox slot="end" [(ngModel)]="habito.completado"></ion-checkbox>
-    </ion-item>
+    <ion-item-sliding *ngFor="let habito of habitos">
+      <ion-item (click)="marcarCompletado(habito.id)">        
+        <ion-checkbox slot="start" [checked]="habito.completado"></ion-checkbox>
+        <ion-label>
+          <h2>{{ habito.titulo }}</h2>
+          <p>{{ habito.descripcion }}</p>
+        </ion-label>
+      </ion-item>
+
+
+      <!-- 🔹 Opciones al deslizar -->
+      <ion-item-options>
+        <ion-item-option color="danger" (click)="eliminarHabito(habito.id)">
+          <ion-icon name="trash"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

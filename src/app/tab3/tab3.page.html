@@ -19,5 +19,14 @@
         <ion-select-option *ngFor="let lang of langs" [value]="lang">{{ lang | translate }}</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="full" shape="round" color="primary" (click)="agregarHabitos()">Agregar 10 hábitos</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>    
   </ion-list>
 </ion-content>

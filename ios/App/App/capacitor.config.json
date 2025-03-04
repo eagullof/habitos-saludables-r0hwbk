@@ -1,0 +1,12 @@
+{
+	"appId": "com.campusdigitalfp.habitossaludables",
+	"appName": "Habitos Saludables",
+	"webDir": "www",
+	"packageClassList": [
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"PreferencesPlugin",
+		"StatusBarPlugin"
+	]
+}

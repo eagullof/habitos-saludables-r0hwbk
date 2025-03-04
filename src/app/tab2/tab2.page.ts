@@ -28,7 +28,7 @@ export class Tab2Page {
         false // No completado por defecto
       );
 
-      this.habitoService.agregarHabitos(nuevoHabito);
+      this.habitoService.agregarHabito(nuevoHabito);
       console.log('Hábito agregado:', nuevoHabito);
       
       // Reiniciar formulario
