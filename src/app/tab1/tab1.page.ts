@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Habito } from '../models/habito.model';
+import { HabitoService } from '../services/habito.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,7 +9,13 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class Tab1Page {
+  habitos: Habito[] = [];
 
-  constructor() {}
+  constructor(private habitoService: HabitoService) {}
+
+  ngOnInit(){
+    // Obtener usuarios
+    this.habitos = this.habitoService.obtenerHabitos();
+  }
 
 }

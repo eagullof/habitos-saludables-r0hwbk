@@ -13,5 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="{{ 'TAB1_TITLE' | translate }}"></app-explore-container>
+  <ion-list>
+    <ion-item *ngFor="let habito of habitos">
+      <ion-label>
+        <h2>{{ habito.titulo }}</h2>
+        <p>{{ habito.descripcion }}</p>
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="habito.completado"></ion-checkbox>
+    </ion-item>
+  </ion-list>
 </ion-content>
