@@ -18,14 +18,16 @@
     <ion-item-sliding *ngFor="let habito of habitos">
       <ion-item (click)="marcarCompletado(habito.id)">        
         <ion-checkbox slot="start" [checked]="habito.completado"></ion-checkbox>
+        <ion-thumbnail slot="start" *ngIf="habito.imagen">
+          <img [src]="habito.imagen" alt="Imagen del hábito">
+        </ion-thumbnail>
+        
         <ion-label>
           <h2>{{ habito.titulo }}</h2>
           <p>{{ habito.descripcion }}</p>
         </ion-label>
       </ion-item>
 
-
-      <!-- 🔹 Opciones al deslizar -->
       <ion-item-options>
         <ion-item-option color="danger" (click)="eliminarHabito(habito.id)">
           <ion-icon name="trash"></ion-icon>
@@ -34,4 +36,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <ion-button shape="round" expand="block" (click)="refrescar()">Refrescar</ion-button>
+
 </ion-content>

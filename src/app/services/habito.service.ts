@@ -39,8 +39,10 @@ export class HabitoService {
     }
   }
 
-  obtenerHabitos(): Habito[] {
-    console.log(this.habitos);
+  async obtenerHabitos(): Promise<Habito[]> {
+    if (this.habitos.length === 0) {
+      await this.cargarHabitos();
+    }
     return this.habitos;
   }
 
@@ -50,22 +52,35 @@ export class HabitoService {
   }
 
   private async guardarHabitos() {
-    await Preferences.set({
-      key: 'habitos',
-      value: JSON.stringify(this.habitos)
-    });
-  }
+    try {
+      await Preferences.set({
+        key: 'habitos',
+        value: JSON.stringify(this.habitos)
+      });
+      console.log('📦 Hábitos guardados:', this.habitos);
+    } catch (error) {
+      console.error('❌ Error guardando hábitos:', error);
+    }
+  }  
 
-  private async cargarHabitos() {
+  async cargarHabitos() {
     const { value } = await Preferences.get({ key: 'habitos' });
-
-    console.log('1️⃣ Datos crudos de Preferences:', value); // Depuración
-
+  
+    console.log('1️⃣ Datos crudos de Preferences:', value); // Verificar datos almacenados
+  
     if (value) {
       const parsedData = JSON.parse(value);
-      this.habitos = parsedData.map((h: any) => new Habito(h.id, h.titulo, h.descripcion, h.completado));
-      console.log('2️⃣ Hábitos convertidos:', this.habitos); // Verificar que ahora son instancias de `Habito`
+      
+      this.habitos = parsedData.map((h: any) => new Habito(
+        h.id,
+        h.titulo,
+        h.descripcion,
+        h.completado,
+        h.imagen
+      ));
+  
+      console.log('2️⃣ Hábitos convertidos:', this.habitos);
     }
-  }
+  }  
 
 }

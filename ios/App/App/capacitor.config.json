@@ -4,6 +4,8 @@
 	"webDir": "www",
 	"packageClassList": [
 		"AppPlugin",
+		"CAPCameraPlugin",
+		"FilesystemPlugin",
 		"HapticsPlugin",
 		"KeyboardPlugin",
 		"PreferencesPlugin",

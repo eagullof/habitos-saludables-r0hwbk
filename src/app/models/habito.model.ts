@@ -3,6 +3,7 @@ export class Habito {
         public id: string,
         public titulo: string,
         public descripcion: string,
-        public completado: boolean
+        public completado: boolean,
+        public imagen?: string,
     ) {}
 }

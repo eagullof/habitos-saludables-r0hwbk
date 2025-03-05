@@ -28,11 +28,15 @@ export class Tab1Page {
 
   async eliminarHabito(id: string) {
     await this.habitoService.eliminarHabito(id);
-    this.habitos = this.habitoService.obtenerHabitos();
+    this.habitos = await this.habitoService.obtenerHabitos();
   }
 
   async marcarCompletado(id: string){
     await this.habitoService.marcarCompletado(id);
+  }
+
+  async refrescar(){
+    this.habitos = await this.habitoService.obtenerHabitos();
   }
 }
 

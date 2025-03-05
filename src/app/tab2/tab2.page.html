@@ -22,6 +22,16 @@
       <ion-textarea formControlName="descripcion" placeholder="Descripción"></ion-textarea>
     </ion-item>
 
+    <ion-item>
+      <ion-button shape="round" expand="block" (click)="seleccionarImagen()">Seleccionar Imagen</ion-button>
+    </ion-item>
+    
+    <ion-item *ngIf="imagen">
+      <ion-thumbnail slot="start">
+        <img [src]="imagen" alt="Imagen seleccionada">
+      </ion-thumbnail>
+    </ion-item>    
+
     <ion-button expand="block" shape="round" type="submit" [disabled]="habitoForm.invalid">
       Agregar Hábito
     </ion-button>
