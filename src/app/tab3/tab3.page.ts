@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { HabitoService } from '../services/habito.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -12,7 +13,7 @@ import { HabitoService } from '../services/habito.service';
 export class Tab3Page {
 
   langs: string [] = [];
-  constructor(private translateService: TranslateService, private habitoService: HabitoService) {
+  constructor(private translateService: TranslateService, private habitoService: HabitoService, private alertCtrl: AlertController) {
     this.langs = this.translateService.getLangs();
   }
 
@@ -24,5 +25,27 @@ export class Tab3Page {
   agregarHabitos(){
     this.habitoService.agregar10Habitos();
   }
+
+  async eliminarTodos() {
+    const alert = await this.alertCtrl.create({
+      header: 'Eliminar todos',
+      message: '¿Estás seguro de que quieres eliminar todos los hábitos?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            await this.habitoService.eliminarTodosHabitos();
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
 
 }

@@ -14,6 +14,24 @@ export class Tab1Page {
 
   constructor(private habitoService: HabitoService, private loadingCtrl: LoadingController) {}
 
+  async ionViewWillEnter() {
+    console.log('🔄 Refrescando Tab 1...');
+    
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando hábitos...',
+      spinner: 'crescent'
+    });
+  
+    await loading.present();
+  
+    this.habitos = await this.habitoService.obtenerHabitos(); // Vuelve a cargar los hábitos
+  
+    console.log('✅ Hábitos actualizados:', this.habitos);
+  
+    await loading.dismiss();
+  }
+
+  
   async ngOnInit() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando hábitos...',
@@ -33,10 +51,6 @@ export class Tab1Page {
 
   async marcarCompletado(id: string){
     await this.habitoService.marcarCompletado(id);
-  }
-
-  async refrescar(){
-    this.habitos = await this.habitoService.obtenerHabitos();
   }
 }
 

@@ -34,8 +34,8 @@ export class HabitoService {
   async marcarCompletado(id: string) {
     const habito = this.habitos.find(h => h.id === id); // Buscar el hábito
     if (habito) {
-      habito.completado = !habito.completado; // ✅ Alternar entre true/false
-      await this.guardarHabitos(); // ✅ Guardar cambios
+      habito.completado = !habito.completado; 
+      await this.guardarHabitos(); 
     }
   }
 
@@ -57,16 +57,16 @@ export class HabitoService {
         key: 'habitos',
         value: JSON.stringify(this.habitos)
       });
-      console.log('📦 Hábitos guardados:', this.habitos);
+      console.log('Hábitos guardados:', this.habitos);
     } catch (error) {
-      console.error('❌ Error guardando hábitos:', error);
+      console.error('Error guardando hábitos:', error);
     }
   }  
 
   async cargarHabitos() {
     const { value } = await Preferences.get({ key: 'habitos' });
   
-    console.log('1️⃣ Datos crudos de Preferences:', value); // Verificar datos almacenados
+    console.log('Datos crudos de Preferences:', value); // Verificar datos almacenados
   
     if (value) {
       const parsedData = JSON.parse(value);
@@ -79,8 +79,19 @@ export class HabitoService {
         h.imagen
       ));
   
-      console.log('2️⃣ Hábitos convertidos:', this.habitos);
+      console.log('Hábitos convertidos:', this.habitos);
     }
   }  
+
+  async eliminarTodosHabitos() {
+    try {
+      this.habitos = []; // Vaciar la lista de hábitos en memoria
+      await Preferences.remove({ key: 'habitos' }); // Eliminar los datos almacenados
+      console.log('Todos los hábitos han sido eliminados correctamente.');
+    } catch (error) {
+      console.error('Error al eliminar todos los hábitos:', error);
+    }
+  }
+  
 
 }
